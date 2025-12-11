@@ -1,0 +1,25 @@
+# Maven compiled files
+target/
+*.class
+
+# Eclipse/IntelliJ project settings (User specific)
+.settings/
+.classpath
+.project
+.idea/
+*.iml
+
+# Logs
+logs/
+*.log
+
+# Downloaded files & Drivers (Don't upload .exe files)
+drivers/
+downloaded_files/
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# TestNG output
+test-output/

@@ -1,0 +1,18 @@
+{
+  "user4": {
+    "email": "joeyA15@outlook.com",
+    "password": "12345",
+    "name": "joeyA4",
+    "dobday": "11",
+    "dobmonth": "October",
+    "dobyear": "1991",
+    "fname": "Joey",
+    "lname": "A4",
+    "country": "Canada", 
+    "city": "Toronto",
+    "state": "Ontario",
+    "zip": "44675",
+    "mnumber": "2345231123",
+    "deliveraddress": "YOUR DELIVERY ADDRESS Mr. Ram sham 12 water street toronto ontario 23456 Canada 2345673456"  
+  }
+}
