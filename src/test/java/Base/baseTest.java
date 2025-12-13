@@ -20,7 +20,6 @@ public class baseTest {
 	@Parameters("browser")
 
 	public void setUp(String browser) {
-		// 2. Initialize the Logger with the current class name
         log = LogManager.getLogger(this.getClass());
         
         log.info(">>> Starting Test Configuration");

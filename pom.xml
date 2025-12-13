@@ -16,7 +16,11 @@
             <artifactId>selenium-java</artifactId>
             <version>4.23.0</version>
         </dependency>
-
+<dependency>
+    <groupId>com.aventstack</groupId>
+    <artifactId>extentreports</artifactId>
+    <version>5.1.1</version>
+</dependency>
         <!-- TestNG -->
         <dependency>
             <groupId>org.testng</groupId>
@@ -37,11 +41,7 @@
             <version>5.8.0</version>
         </dependency>
 
-        <dependency>
-        	<groupId>RamanKhattraWorkspace</groupId>
-        	<artifactId>SeleniumFramework_Automation</artifactId>
-        	<version>0.0.1-SNAPSHOT</version>
-        </dependency>
+        
         <dependency>
     <groupId>org.apache.logging.log4j</groupId>
     <artifactId>log4j-core</artifactId>

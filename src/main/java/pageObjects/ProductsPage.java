@@ -89,7 +89,7 @@ public class ProductsPage {
                 actionUtils.scrollToElement(driver, product);
                 Actions actions = new Actions(driver);
                 actions.moveToElement(product).perform();
-                Thread.sleep(300); // wait for overlay animation
+                Thread.sleep(400); // wait for overlay animation
 
                 // Click Add to Cart
                 WebElement addToCartButton = product.findElement(

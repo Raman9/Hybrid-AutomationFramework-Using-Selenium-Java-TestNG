@@ -1,6 +1,9 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Cross Browser Suite" thread-count="2">
-    <test name="Chrome Test">
+<suite name="Mulitple Browser Suite" thread-count="2">
+	<listeners>
+        <listener class-name="Listeners.TestListener"/>
+    </listeners>
+    <test name="Edge Test">
         <parameter name="browser" value="edge"/>
         <classes>
             
@@ -8,7 +11,7 @@
             
         </classes>
         </test>
-        <test name="Edge Test">
+        <test name="Chrome Test">
         <parameter name="browser" value="chrome"/>
         <classes>
             <class name="tests.RegisterUserTest"/> </classes>

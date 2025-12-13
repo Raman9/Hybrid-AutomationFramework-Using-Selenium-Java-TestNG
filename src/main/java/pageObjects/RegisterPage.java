@@ -112,9 +112,11 @@ public class RegisterPage
 	    ftitle.click(); 
 	    fullpassword.sendKeys(user.password);
 
-	   
+	    waitUtils.waitForClickable(driver, dobday, 0);
 	    new Select(dobday).selectByVisibleText(user.dobday);
+	    waitUtils.waitForClickable(driver, dobmonth, 0);
 	    new Select(dobmonth).selectByVisibleText(user.dobmonth);
+	    waitUtils.waitForClickable(driver, dobyear, 0);
 	    new Select(dobyear).selectByVisibleText(user.dobyear);
 
 	    
