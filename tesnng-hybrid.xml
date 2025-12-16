@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Mulitple Browser Suite" thread-count="2">
+<suite name="Mulitple Browser Suite" parallel="tests"  thread-count="2">
 	<listeners>
         <listener class-name="Listeners.TestListener"/>
     </listeners>
@@ -8,12 +8,15 @@
         <classes>
             
             <class name="tests.RegisterUserTest"/>
+            <class name="tests.E2EDataDrivenTest"/>
             
         </classes>
         </test>
         <test name="Chrome Test">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="tests.RegisterUserTest"/> </classes>
+            <class name="tests.RegisterUserTest"/>
+            <class name="tests.E2EDataDrivenTest"/>
+             </classes>
     </test>
 </suite>
