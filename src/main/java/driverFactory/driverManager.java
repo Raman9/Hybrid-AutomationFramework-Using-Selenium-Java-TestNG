@@ -46,23 +46,39 @@ public class driverManager {
 
 		switch (browser.toLowerCase()) {
 		case "chrome":
-			WebDriverManager.chromedriver().setup();
-			ChromeOptions cOptions = new ChromeOptions();
-			Map<String, Object> prefs = new HashMap<>();
-			prefs.put("download.default_directory", DOWNLOAD_DIR);
-			prefs.put("download.prompt_for_download", false);
-			prefs.put("plugins.always_open_pdf_externally", true);
+		    ChromeOptions options = new ChromeOptions();
+		    Map<String, Object> prefs = new HashMap<>();
+		    prefs.put("download.default_directory", DOWNLOAD_DIR);
+		    prefs.put("download.prompt_for_download", false);
+		    options.setExperimentalOption("prefs", prefs);
+		    
+		    options.addArguments("--remote-allow-origins=*");
+		    options.addArguments("--start-maximized");
 
-			cOptions.setExperimentalOption("prefs", prefs);
-			cOptions.addArguments("--start-maximized");
-			cOptions.addArguments("--remote-allow-origins=*");
-			if (isHeadless) {
-				cOptions.addArguments("--headless=new");
-				cOptions.addArguments("--window-size=1920,1080");
-			}
+		    // --- HYBRID DRIVER PATH (Windows vs Linux) ---
+		    if (System.getProperty("os.name").toLowerCase().contains("win")) {
+		        // 1. Windows (Local): Use your specific .exe file
+		        String chromeDriverPath = System.getProperty("user.dir") + File.separator + "drivers" + File.separator + "chromedriver.exe";
+		        System.setProperty("webdriver.chrome.driver", chromeDriverPath);
+		    } 
+		    // 2. Linux (GitHub Actions): Do nothing. Selenium Manager handles the download automatically.
 
-			driver.set(new ChromeDriver(cOptions));
-			break;
+		    // --- CRITICAL FIX FOR GITHUB ACTIONS ---
+		    // If we are NOT on Windows (meaning we are on Linux/CI), we MUST apply these fixes:
+		    if (!System.getProperty("os.name").toLowerCase().contains("win")) {
+		        options.addArguments("--headless=new"); // No GUI
+		        options.addArguments("--no-sandbox");   // ⚠️ Essential: Prevents the "Chrome instance exited" crash
+		        options.addArguments("--disable-dev-shm-usage"); // Prevents memory errors
+		        options.addArguments("--window-size=1920,1080");
+		    }
+		    // Alternatively, if you use your config file's 'isHeadless' flag:
+		    else if (isHeadless) {
+		        options.addArguments("--headless=new");
+		        options.addArguments("--window-size=1920,1080");
+		    }
+
+		    driver.set(new ChromeDriver(options));
+		    break;
 
 		case "edge":
 			EdgeOptions eOptions = new EdgeOptions();

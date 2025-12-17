@@ -8,7 +8,7 @@
         <classes>
             
             <class name="tests.RegisterUserTest"/>
-            <class name="tests.E2EDataDrivenTest"/>
+             <class name="tests.E2EDataDrivenTest"/>
             
         </classes>
         </test>
@@ -16,7 +16,7 @@
         <parameter name="browser" value="chrome"/>
         <classes>
             <class name="tests.RegisterUserTest"/>
-            <class name="tests.E2EDataDrivenTest"/>
+            <class name="tests.E2EDataDrivenTest"/> 
              </classes>
     </test>
 </suite>
