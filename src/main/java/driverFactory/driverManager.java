@@ -43,7 +43,81 @@ public class driverManager {
 		if (browser == null || browser.isEmpty()) {
 			browser = "chrome";
 		}
+		// Inside your initDriver method...
 
+		String osName = System.getProperty("os.name").toLowerCase();
+		boolean isLinux = osName.contains("nux") || osName.contains("nix");
+
+		switch (browser.toLowerCase()) {
+
+		    // ============================================
+		    //              CHROME SETUP
+		    // ============================================
+		    case "chrome":
+		        ChromeOptions chromeOptions = new ChromeOptions();
+		        
+		        // 1. Basic Preferences
+		        Map<String, Object> chromePrefs = new HashMap<>();
+		        chromePrefs.put("download.default_directory", DOWNLOAD_DIR);
+		        chromePrefs.put("download.prompt_for_download", false);
+		        chromeOptions.setExperimentalOption("prefs", chromePrefs);
+		        chromeOptions.addArguments("--remote-allow-origins=*");
+
+		        if (isLinux) {
+		            // 🛑 CI/CD (GitHub Actions) MUST use these options or it CRASHES
+		            System.out.println("🐧 LINUX DETECTED: Forcing Headless & No-Sandbox Mode for Chrome");
+		            chromeOptions.addArguments("--headless=new");
+		            chromeOptions.addArguments("--no-sandbox");             // <--- CRITICAL
+		            chromeOptions.addArguments("--disable-dev-shm-usage");  // <--- CRITICAL
+		            chromeOptions.addArguments("--window-size=1920,1080");
+		        } 
+		        else {
+		            // 💻 Windows (Local): Use your .exe and Config flag
+		            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/drivers/chromedriver.exe");
+		            if (isHeadless) { 
+		                chromeOptions.addArguments("--headless=new"); 
+		            }
+		            chromeOptions.addArguments("--start-maximized");
+		        }
+
+		        driver.set(new ChromeDriver(chromeOptions));
+		        break;
+
+		    // ============================================
+		    //               EDGE SETUP
+		    // ============================================
+		    case "edge":
+		        EdgeOptions edgeOptions = new EdgeOptions();
+		        
+		        // 1. Basic Preferences
+		        Map<String, Object> edgePrefs = new HashMap<>();
+		        edgePrefs.put("download.default_directory", DOWNLOAD_DIR);
+		        edgePrefs.put("download.prompt_for_download", false);
+		        edgePrefs.put("plugins.always_open_pdf_externally", true);
+		        edgeOptions.setExperimentalOption("prefs", edgePrefs);
+		        edgeOptions.addArguments("--remote-allow-origins=*");
+
+		        if (isLinux) {
+		            // 🛑 CI/CD (GitHub Actions) MUST use these options or it CRASHES
+		            System.out.println("🐧 LINUX DETECTED: Forcing Headless & No-Sandbox Mode for Edge");
+		            edgeOptions.addArguments("--headless=new");
+		            edgeOptions.addArguments("--no-sandbox");             // <--- CRITICAL
+		            edgeOptions.addArguments("--disable-dev-shm-usage");  // <--- CRITICAL
+		            edgeOptions.addArguments("--window-size=1920,1080");
+		        } 
+		        else {
+		            // 💻 Windows (Local): Use your .exe and Config flag
+		            System.setProperty("webdriver.edge.driver", System.getProperty("user.dir") + "/drivers/msedgedriver.exe");
+		            if (isHeadless) {
+		                edgeOptions.addArguments("--headless=new");
+		            }
+		            edgeOptions.addArguments("--start-maximized");
+		        }
+
+		        driver.set(new EdgeDriver(edgeOptions));
+		        break;
+		}}
+		/*
 		switch (browser.toLowerCase()) {
 		case "chrome":
 		    ChromeOptions options = new ChromeOptions();
@@ -116,7 +190,7 @@ public class driverManager {
 
 		}
 	}
-
+*/
 	public static boolean waitForFileDownload(String fileName, int timeoutSeconds) {
 		File dir = new File(DOWNLOAD_DIR);
 		int totalWaited = 0;
