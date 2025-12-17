@@ -34,7 +34,6 @@ public class driverManager {
 		if (driver.get() != null)
 			return;
 
-		// Fallback to "chrome" if browser is null/empty
 		if (browser == null || browser.isEmpty()) {
 			browser = "chrome";
 		}
@@ -66,10 +65,6 @@ public class driverManager {
 			break;
 
 		case "edge":
-			// WebDriverManager.edgedriver().setup();
-			String edgeDriverPath = System.getProperty("user.dir") + File.separator + "drivers" + File.separator
-					+ "msedgedriver.exe";
-			System.setProperty("webdriver.edge.driver", edgeDriverPath);
 			EdgeOptions eOptions = new EdgeOptions();
 			Map<String, Object> edgePrefs = new HashMap<>();
 			edgePrefs.put("download.default_directory", DOWNLOAD_DIR);
@@ -78,8 +73,25 @@ public class driverManager {
 			eOptions.setExperimentalOption("prefs", edgePrefs);
 			eOptions.addArguments("--start-maximized");
 			eOptions.addArguments("--remote-allow-origins=*");
+
+			//
+			if (System.getProperty("os.name").toLowerCase().contains("win")) {
+
+				String edgeDriverPath = System.getProperty("user.dir") + File.separator + "drivers" + File.separator
+						+ "msedgedriver.exe";
+
+				System.setProperty("webdriver.edge.driver", edgeDriverPath);
+
+				File driverFile = new File(edgeDriverPath);
+				if (!driverFile.exists()) {
+					System.out.println("⚠️ WARNING: msedgedriver.exe not found at: " + edgeDriverPath);
+					System.out.println("Please download it and place it in the 'drivers' folder.");
+				}
+			}
+			// On Linux (Pipeline)
+
 			if (isHeadless) {
-				eOptions.addArguments("--headless=new"); //
+				eOptions.addArguments("--headless=new");
 				eOptions.addArguments("--window-size=1920,1080");
 			}
 
