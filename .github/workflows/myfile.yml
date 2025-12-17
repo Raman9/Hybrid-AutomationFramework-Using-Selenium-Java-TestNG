@@ -1,0 +1,36 @@
+name: My First Automation Pipeline
+
+# TRIGGER: Run this when I push code to the 'main' branch
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch: # This allows you to click a button to run it manually
+
+# THE JOB
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest  # Use a Linux virtual machine
+
+    steps:
+    # Step 1: Download your code to the virtual machine
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    # Step 2: Install Java (Java 17 is standard now)
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    # Step 3: Run your tests using Maven
+    - name: Run Selenium Tests
+      run: mvn clean test -Dsurefire.suiteXmlFiles=testng-hybrid.xml
+
+    # Step 4: (Optional) Upload the Test Report so you can see it later
+    - name: Upload Report
+      if: always() # Run this even if tests fail
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results
+        path: target/surefire-reports
