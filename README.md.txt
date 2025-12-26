@@ -8,8 +8,8 @@ A robust, thread-safe automated testing framework built with **Java**, **Seleniu
 * **Dynamic Reporting:** Integrated **ExtentReports** with automatic pass/fail logging and screenshots.
 * **Smart Download Handling:** Automated verification of file downloads using custom polling logic.
 * **Driver Factory:** Centralized browser initialization supporting Chrome (Headless/GUI) and Firefox.
-* **CI/CD Ready:** Configured for seamless execution on Jenkins or GitHub Actions.
-* **Data Driven:** (Optional - add if you used it) Supports external data inputs via JSON/Excel.
+* **CI/CD Ready:** Configured for seamless execution on  GitHub Actions.
+* **Data Driven:** Supports external data inputs via JSON.
 
 ## 🛠️ Tech Stack
 
@@ -19,6 +19,12 @@ A robust, thread-safe automated testing framework built with **Java**, **Seleniu
 * **Build Tool:** Maven
 * **Reporting:** ExtentReports 5
 * **Version Control:** Git
+
+## 🧩 Framework Design
+- Page Object Model (POM)
+- Driver Factory with ThreadLocal
+- TestNG Listeners for reporting
+- Maven for dependency management
 
 ## 📂 Project Structure
 
