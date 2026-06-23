@@ -38,7 +38,8 @@ public class baseTest {
 	}
 
 	
-	 @AfterClass(alwaysRun = true) public void tearDown() {
+	 @AfterClass(alwaysRun = true)
+	 public void tearDown() {
 		 log.info(">>> Test Finished. Closing Driver.");
 		 driverManager.quitDriver(); }
 	 

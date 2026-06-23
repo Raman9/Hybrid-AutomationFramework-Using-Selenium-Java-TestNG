@@ -27,9 +27,9 @@ public class configReader { // Assuming your class name starts with lowercase 'c
     }
 
     public static String getProperty(String key) {
-        if (properties == null) {
-            loadConfig();
-        }
+    	if (properties == null) {
+    		loadConfig();
+    	 }
         return properties.getProperty(key);
     }
 }

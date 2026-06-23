@@ -28,8 +28,6 @@ public class RegisterUserTest extends baseTest {
 		
 		
 
-		Thread.sleep(2000);
-
 		UserData randomData = DataGeneratorUtil.getRandomUser();
 		String userPassword = register.accountinfo(randomData);
 		log.info("User passsword:" +userPassword);
